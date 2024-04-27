@@ -62,9 +62,14 @@ const Profilepage = () => {
             <Col xs={6}>
               <Row>
                 <Col xs={8}>
-                  <span className="btn placeholder col-10 bg-secondary text-white mx-3 fs-6 fs-xl-4 rounded-0">
-                    Steve Student
-                  </span>
+                  <Form.Control
+                    type="text"
+                    placeholder="Steve Student"
+                    aria-label="Disabled input example"
+                    disabled
+                    readOnly
+                    className="rounded-0 bg-secondary border-0"
+                  />
                 </Col>
                 <Col xs={4}></Col>
               </Row>
