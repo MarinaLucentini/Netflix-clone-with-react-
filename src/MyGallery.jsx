@@ -1,5 +1,10 @@
 import { Component } from "react";
-import { Alert, Spinner } from "react-bootstrap";
+import {
+  Alert,
+  Spinner,
+  Card,
+  Button,
+} from "react-bootstrap";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import React from "react";
@@ -11,6 +16,7 @@ class MyGallery extends Component {
     isLoading: false,
     isError: false,
     errorMsg: "",
+    isShow: false,
   };
 
   fetchMovies = () => {
@@ -60,6 +66,13 @@ class MyGallery extends Component {
   componentDidMount = (fetch) => {
     this.fetchMovies();
   };
+  handleMouseEnter = () => {
+    this.setState({ isShow: true });
+  };
+
+  handleMouseLeave = () => {
+    this.setState({ isShow: false });
+  };
   render() {
     const filterMovies = this.state.movies.filter(
       (film, index) => index < 6
@@ -103,8 +116,8 @@ class MyGallery extends Component {
     };
 
     return (
-      <>
-        <h4>
+      <div className="my-3">
+        <h4 className="my-3">
           {this.props.title}
           {this.state.isLoading && (
             <Spinner animation="border" variant="primary" />
@@ -120,18 +133,51 @@ class MyGallery extends Component {
           <Slider {...settings}>
             {filterMovies.map((films) => {
               return (
-                <div>
-                  <img
-                    src={films.Poster}
-                    alt={films.Title}
-                    className="img-fluid img-card"
-                  />
-                </div>
+                <>
+                  <div
+                    onMouseEnter={this.handleMouseEnter}
+                    onMouseLeave={this.handleMouseLeave}
+                    key={films.imdbID}
+                    className="mx-2"
+                  >
+                    {!this.state.isShow && (
+                      <img
+                        src={films.Poster}
+                        alt={films.Title}
+                        className="img-fluid img-card object-fit-cover"
+                      />
+                    )}
+                  </div>
+
+                  {this.state.isShow && (
+                    <Card
+                      onMouseEnter={this.handleMouseEnter}
+                      onMouseLeave={this.handleMouseLeave}
+                      className="bg-dark text-white"
+                    >
+                      <Card.Img
+                        variant="top"
+                        src={films.Poster}
+                      />
+                      <Card.Body>
+                        <Card.Title>
+                          {films.Title}
+                        </Card.Title>
+                        <Button
+                          variant="outline-light"
+                          className="rounded-circle"
+                        >
+                          <i class="bi bi-play-fill"></i>
+                        </Button>
+                      </Card.Body>
+                    </Card>
+                  )}
+                </>
               );
             })}
           </Slider>
         </div>
-      </>
+      </div>
     );
   }
 }
