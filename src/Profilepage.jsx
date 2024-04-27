@@ -36,9 +36,7 @@ const Profilepage = () => {
           <Row>
             <Col xs={2}></Col>
             <Col xs={8}>
-              <h1 className="text-white fs-6 fs-md-4 fs-xl-1">
-                Edit Profile
-              </h1>
+              <h1 className="text-white">Edit Profile</h1>
               <hr className="border border-secondary" />
             </Col>
             <Col xs={2}></Col>
@@ -64,7 +62,7 @@ const Profilepage = () => {
             <Col xs={6}>
               <Row>
                 <Col xs={8}>
-                  <span className="btn placeholder col-10 bg-secondary text-white mx-3 fs-6 fs-xl-4">
+                  <span className="btn placeholder col-10 bg-secondary text-white mx-3 fs-6 fs-xl-4 rounded-0">
                     Steve Student
                   </span>
                 </Col>
@@ -80,7 +78,7 @@ const Profilepage = () => {
                     <Col xs={4} lg={6}>
                       <Dropdown>
                         <DropdownToggle
-                          className="btn-secondary"
+                          className="btn-secondary rounded-0"
                           data-bs-toggle="dropdown"
                           aria-expanded="false"
                         >
@@ -113,7 +111,7 @@ const Profilepage = () => {
                 <Col>
                   <Row>
                     <Col xs={12} lg={6}>
-                      <span className="btn placeholder col-6 bg-secondary text-white mx-3 fs-6 fs-xl-4">
+                      <span className="btn placeholder bg-secondary text-white mx-3 fs-6 fs-xl-4 rounded-0">
                         ALL MATURITY LANGUAGE
                       </span>
                     </Col>
@@ -129,7 +127,10 @@ const Profilepage = () => {
                 <Col>
                   <Row>
                     <Col xs={5} lg={2}>
-                      <Button className="btn btn-outline-light fs-6 fs-xl-4 p-0 p-md-1">
+                      <Button
+                        className=" fs-6 fs-xl-4 p-0 p-md-1 rounded-0"
+                        variant="outline-light"
+                      >
                         EDIT
                       </Button>
                     </Col>
@@ -185,28 +186,34 @@ const Profilepage = () => {
         </Container>
         <Container className="text-center">
           <Row>
-            <Col xs={2}></Col>
-            <Col xs={8}>
-              <hr className="border border-secondary" />
-              <Row class="row">
+            <Col className="d-flex align-items-center justify-content-center ">
+              <Row className="border-top py-3">
                 <Col xs={4} lg={2}>
-                  <Button className="btn-outline-secondary fs-6 fs-xl-4 p-0 p-md-1">
+                  <Button
+                    className=" fs-6 fs-xl-4 p-0 p-md-1 rounded-0"
+                    variant="outline-secondary"
+                  >
                     SAVE
                   </Button>
                 </Col>
                 <Col xs={4} lg={2}>
-                  <Button className=" btn-outline-secondary fs-6 fs-xl-4 p-0 p-md-1">
+                  <Button
+                    className="  fs-6 fs-xl-4 p-0 p-md-1 rounded-0"
+                    variant="outline-secondary"
+                  >
                     CANCEL
                   </Button>
                 </Col>
                 <Col xs={4} lg={8}>
-                  <Button className="btn-outline-secondary fs-6 fs-xl-4 p-0 p-md-1">
+                  <Button
+                    className=" fs-6 fs-xl-4 p-0 p-md-1 rounded-0"
+                    variant="outline-secondary"
+                  >
                     DELETE PROFILE
                   </Button>
                 </Col>
               </Row>
             </Col>
-            <Col xs={2}></Col>
           </Row>
         </Container>
       </main>
