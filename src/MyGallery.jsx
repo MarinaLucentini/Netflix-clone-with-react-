@@ -74,9 +74,13 @@ class MyGallery extends Component {
     this.setState({ isShow: false });
   };
   render() {
-    const filterMovies = this.state.movies.filter(
-      (film, index) => index < 6
-    );
+    const filterMovies =
+      this.state.movies && this.state.movies.length > 0
+        ? this.state.movies.filter(
+            (film, index) => index < 6
+          )
+        : [];
+
     const settings = {
       dots: true,
       infinite: true,

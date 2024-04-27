@@ -13,11 +13,18 @@ import MyNav from "./MyNav";
 import MyFooter from "./MyFooter";
 
 class HomeMain extends Component {
+  state = {
+    searchUser: "",
+  };
+  handlesearchUser = (search) => {
+    this.setState({ searchUser: search });
+    console.log(typeof this.state.searchUser);
+  };
   render() {
     return (
       <>
         <header>
-          <MyNav />
+          <MyNav onSearch={this.handlesearchUser} />
         </header>
         <main>
           <Container fluid className="px-4">
