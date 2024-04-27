@@ -153,7 +153,7 @@ class MyGallery extends Component {
                     <Card
                       onMouseEnter={this.handleMouseEnter}
                       onMouseLeave={this.handleMouseLeave}
-                      className="bg-dark text-white"
+                      className="bg-dark text-white mx-2"
                     >
                       <Card.Img
                         variant="top"
