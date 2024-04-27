@@ -8,6 +8,7 @@ class MyGallery extends Component {
     movies: [],
     isLoading: false,
     isError: false,
+    errorMsg: "",
   };
 
   fetchMovies = () => {
@@ -22,6 +23,23 @@ class MyGallery extends Component {
           console.log("fetch conclusa");
           return resp.json();
         } else {
+          if (resp.status === 400) {
+            throw new Error(
+              "Richiesta errata o incompleta"
+            );
+          }
+          if (resp.status === 401) {
+            throw new Error("Richiesta non autorizzata");
+          }
+          if (resp.status === 403) {
+            throw new Error("Forbidden");
+          }
+          if (resp.status === 404) {
+            throw new Error("Elemento non trovato");
+          }
+          if (resp.status === 500) {
+            throw new Error("Server Error");
+          }
           throw new Error("Errore nella richiesta");
         }
       })
@@ -32,6 +50,7 @@ class MyGallery extends Component {
       .catch((err) => {
         console.log(err);
         this.setState({ isError: true });
+        this.setState({ errorMsg: err.message });
       })
       .finally(() => {
         this.setState({ isLoading: false });
@@ -56,7 +75,7 @@ class MyGallery extends Component {
         </h4>
         {this.state.isError && (
           <Alert variant="danger">
-            Si è verificato un errore
+            {this.state.errorMsg}
           </Alert>
         )}
         <Row xs={1} sm={2} lg={4} xl={6} className="mb-4">
