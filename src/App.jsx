@@ -1,16 +1,16 @@
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./App.css";
-import SettingPage from "./SettingPage";
+// import SettingPage from "./SettingPage";
 
-// import Homepage from "./Homepage";
+import Homepage from "./Homepage";
 // import Profilepage from "./Profilepage";
 
 function App() {
   return (
     <div>
-      {/* <Homepage /> */}
+      <Homepage />
       {/* <Profilepage /> */}
-      <SettingPage />
+      {/* <SettingPage /> */}
     </div>
   );
 }
