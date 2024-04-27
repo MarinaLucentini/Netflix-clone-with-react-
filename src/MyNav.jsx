@@ -18,11 +18,7 @@ const MyNav = () => {
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav>
-            <Nav.Link
-              href="#home"
-              active
-              className="fw-bold"
-            >
+            <Nav.Link href="#home" className="fw-bold">
               Home
             </Nav.Link>
             <Nav.Link href="#Tvshows" className="fw-bold">

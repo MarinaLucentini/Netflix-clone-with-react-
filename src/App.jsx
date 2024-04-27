@@ -1,19 +1,14 @@
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./App.css";
-import MyNav from "./MyNav";
-import Home from "./HomeMain";
-import MyFooter from "./MyFooter";
+
+// import Homepage from "./Homepage";
+import Profilepage from "./Profilepage";
 
 function App() {
   return (
     <div>
-      <header>
-        <MyNav />
-      </header>
-      <main>
-        <Home />
-      </main>
-      <MyFooter />
+      {/* <Homepage /> */}
+      <Profilepage />
     </div>
   );
 }
