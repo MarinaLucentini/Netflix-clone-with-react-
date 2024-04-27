@@ -1,7 +1,9 @@
 import { Component } from "react";
-import { Alert, Col, Row, Spinner } from "react-bootstrap";
+import { Alert, Spinner } from "react-bootstrap";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
+import React from "react";
+import Slider from "react-slick";
 
 class MyGallery extends Component {
   state = {
@@ -13,14 +15,13 @@ class MyGallery extends Component {
 
   fetchMovies = () => {
     this.setState({ isLoading: true });
-    console.log("fetch in corso...");
+
     fetch(
       "http://www.omdbapi.com/?apikey=cb94ee65&s=" +
         this.props.fetch
     )
       .then((resp) => {
         if (resp.ok) {
-          console.log("fetch conclusa");
           return resp.json();
         } else {
           if (resp.status === 400) {
@@ -44,7 +45,6 @@ class MyGallery extends Component {
         }
       })
       .then((movies) => {
-        console.log(movies.Search);
         this.setState({ movies: movies.Search });
       })
       .catch((err) => {
@@ -64,6 +64,43 @@ class MyGallery extends Component {
     const filterMovies = this.state.movies.filter(
       (film, index) => index < 6
     );
+    const settings = {
+      dots: true,
+      infinite: true,
+      speed: 2000,
+      slidesToShow: 6,
+      slidesToScroll: 6,
+      initialSlide: 0,
+
+      responsive: [
+        {
+          breakpoint: 1024,
+          settings: {
+            className: "center",
+            centerMode: true,
+            infinite: true,
+            centerPadding: "60px",
+            slidesToShow: 3,
+            speed: 2000,
+          },
+        },
+        {
+          breakpoint: 600,
+          settings: {
+            slidesToShow: 2,
+            slidesToScroll: 2,
+            initialSlide: 2,
+          },
+        },
+        {
+          breakpoint: 480,
+          settings: {
+            slidesToShow: 1,
+            slidesToScroll: 1,
+          },
+        },
+      ],
+    };
 
     return (
       <>
@@ -78,22 +115,22 @@ class MyGallery extends Component {
             {this.state.errorMsg}
           </Alert>
         )}
-        <Row xs={1} sm={2} lg={4} xl={6} className="mb-4">
-          {filterMovies.map((films) => {
-            return (
-              <Col
-                className="mb-2 text-center px-1"
-                key={films.imdbID}
-              >
-                <img
-                  src={films.Poster}
-                  alt={films.Title}
-                  className="img-card"
-                />
-              </Col>
-            );
-          })}
-        </Row>
+
+        <div className="slider-container">
+          <Slider {...settings}>
+            {filterMovies.map((films) => {
+              return (
+                <div>
+                  <img
+                    src={films.Poster}
+                    alt={films.Title}
+                    className="img-fluid img-card"
+                  />
+                </div>
+              );
+            })}
+          </Slider>
+        </div>
       </>
     );
   }
