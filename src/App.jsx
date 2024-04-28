@@ -1,6 +1,7 @@
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./App.css";
-import HomeMain from "./HomeMain";
+// import HomeMain from "./HomeMain";
+import Search from "./Search";
 // import SettingPage from "./SettingPage";
 
 // import Profilepage from "./Profilepage";
@@ -8,9 +9,10 @@ import HomeMain from "./HomeMain";
 function App() {
   return (
     <div>
-      <HomeMain />
+      {/* <HomeMain /> */}
       {/* <Profilepage /> */}
       {/* <SettingPage /> */}
+      <Search />
     </div>
   );
 }
