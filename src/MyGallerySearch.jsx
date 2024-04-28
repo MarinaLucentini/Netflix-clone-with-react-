@@ -20,6 +20,7 @@ class MyGallerySearch extends Component {
   };
 
   fetchMovies = () => {
+    if (!this.props.fetch) return;
     this.setState({ isLoading: true });
 
     fetch(
@@ -51,6 +52,7 @@ class MyGallerySearch extends Component {
         }
       })
       .then((movies) => {
+        console.log(movies);
         this.setState({ movies: movies.Search });
       })
       .catch((err) => {
@@ -74,12 +76,12 @@ class MyGallerySearch extends Component {
     this.setState({ isShow: false });
   };
   render() {
-    // const filterMovies =
-    //   this.state.movies && this.state.movies.length > 0
-    //     ? this.state.movies.filter(
-    //         (film, index) => index < 6
-    //       )
-    //     : [];
+    const filterMovies =
+      this.state.movies && this.state.movies.length > 0
+        ? this.state.movies.filter(
+            (film, index) => index < 6
+          )
+        : [];
 
     const settings = {
       dots: true,
@@ -135,7 +137,7 @@ class MyGallerySearch extends Component {
 
         <div className="slider-container">
           <Slider {...settings}>
-            {this.state.movies.map((films) => {
+            {filterMovies.map((films) => {
               return (
                 <>
                   <div
