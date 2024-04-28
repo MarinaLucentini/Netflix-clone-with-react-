@@ -157,7 +157,7 @@ class MyGallery extends Component {
                     <Card
                       onMouseEnter={this.handleMouseEnter}
                       onMouseLeave={this.handleMouseLeave}
-                      className="bg-dark text-white mx-2"
+                      className="bg-dark text-white mx-2 card-size"
                     >
                       <Card.Img
                         variant="top"
@@ -171,7 +171,7 @@ class MyGallery extends Component {
                           variant="outline-light"
                           className="rounded-circle"
                         >
-                          <i class="bi bi-play-fill"></i>
+                          <i className="bi bi-play-fill"></i>
                         </Button>
                       </Card.Body>
                     </Card>

@@ -11,6 +11,9 @@ body {
   height: 165px;
   width: 100%;
 }
+.card-size {
+  height: 500px;
+}
 h2,
 h4,
 footer {

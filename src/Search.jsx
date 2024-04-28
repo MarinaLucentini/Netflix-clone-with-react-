@@ -53,9 +53,9 @@ class Search extends Component {
                 </Dropdown>
               </Col>
               <Col className="d-flex justify-content-end">
-                <i class="bi bi-grid icons"></i>
+                <i className="bi bi-grid icons"></i>
 
-                <i class="bi bi-grid-3x3 icons"></i>
+                <i className="bi bi-grid-3x3 icons"></i>
               </Col>
             </Row>
             <MyGallerySearch

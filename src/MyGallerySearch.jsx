@@ -4,6 +4,7 @@ import {
   Spinner,
   Card,
   Button,
+  Stack,
 } from "react-bootstrap";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
@@ -17,6 +18,7 @@ class MyGallerySearch extends Component {
     isError: false,
     errorMsg: "",
     isShow: false,
+    isFetch: false,
   };
 
   fetchMovies = () => {
@@ -29,6 +31,7 @@ class MyGallerySearch extends Component {
     )
       .then((resp) => {
         if (resp.ok) {
+          console.log(resp);
           return resp.json();
         } else {
           if (resp.status === 400) {
@@ -52,8 +55,8 @@ class MyGallerySearch extends Component {
         }
       })
       .then((movies) => {
-        console.log(movies);
         this.setState({ movies: movies.Search });
+        console.log(movies);
       })
       .catch((err) => {
         console.log(err);
@@ -65,9 +68,20 @@ class MyGallerySearch extends Component {
       });
   };
 
-  componentDidMount = (fetch) => {
-    this.fetchMovies();
-  };
+  componentDidMount() {
+    if (this.props.fetch) {
+      this.fetchMovies();
+    }
+  }
+
+  componentDidUpdate(prevProps) {
+    if (this.props.fetch !== prevProps.fetch) {
+      if (this.props.fetch) {
+        this.fetchMovies();
+      }
+    }
+  }
+
   handleMouseEnter = () => {
     this.setState({ isShow: true });
   };
@@ -75,13 +89,13 @@ class MyGallerySearch extends Component {
   handleMouseLeave = () => {
     this.setState({ isShow: false });
   };
+  handleClickButton = () => {
+    this.setState({ isFetch: true });
+  };
   render() {
-    const filterMovies =
-      this.state.movies && this.state.movies.length > 0
-        ? this.state.movies.filter(
-            (film, index) => index < 6
-          )
-        : [];
+    const filterMovies = this.state.movies.filter(
+      (film, index) => index < 6
+    );
 
     const settings = {
       dots: true,
@@ -95,8 +109,6 @@ class MyGallerySearch extends Component {
         {
           breakpoint: 1024,
           settings: {
-            className: "center",
-            centerMode: true,
             infinite: true,
             centerPadding: "60px",
             slidesToShow: 3,
@@ -123,12 +135,18 @@ class MyGallerySearch extends Component {
 
     return (
       <div className="my-3">
-        <h4 className="my-3">
-          {this.props.title}
-          {this.state.isLoading && (
-            <Spinner animation="border" variant="primary" />
-          )}
-        </h4>
+        <Stack direction="horizontal">
+          <h4 className="my-3">
+            {this.props.title}
+
+            {this.state.isLoading && (
+              <Spinner
+                animation="border"
+                variant="primary"
+              />
+            )}
+          </h4>
+        </Stack>
         {this.state.isError && (
           <Alert variant="danger">
             {this.state.errorMsg}
@@ -159,7 +177,7 @@ class MyGallerySearch extends Component {
                     <Card
                       onMouseEnter={this.handleMouseEnter}
                       onMouseLeave={this.handleMouseLeave}
-                      className="bg-dark text-white mx-2"
+                      className="bg-dark text-white mx-2 card-size"
                     >
                       <Card.Img
                         variant="top"
@@ -173,7 +191,7 @@ class MyGallerySearch extends Component {
                           variant="outline-light"
                           className="rounded-circle"
                         >
-                          <i class="bi bi-play-fill"></i>
+                          <i className="bi bi-play-fill"></i>
                         </Button>
                       </Card.Body>
                     </Card>

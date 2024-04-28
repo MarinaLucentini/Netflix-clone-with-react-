@@ -18,7 +18,6 @@ class HomeMain extends Component {
   };
   handlesearchUser = (search) => {
     this.setState({ searchUser: search });
-    console.log(typeof this.state.searchUser);
   };
   render() {
     return (
@@ -52,9 +51,9 @@ class HomeMain extends Component {
                 </Dropdown>
               </Col>
               <Col className="d-flex justify-content-end">
-                <i class="bi bi-grid icons"></i>
+                <i className="bi bi-grid icons"></i>
 
-                <i class="bi bi-grid-3x3 icons"></i>
+                <i className="bi bi-grid-3x3 icons"></i>
               </Col>
             </Row>
             <MyGallery

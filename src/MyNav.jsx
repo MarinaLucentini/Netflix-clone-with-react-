@@ -71,7 +71,7 @@ class MyNav extends Component {
             >
               {this.state.isShow && (
                 <>
-                  <InputGroup className="mb-3">
+                  <InputGroup>
                     <Form.Control
                       placeholder="Cerca la tua saga"
                       aria-label="Recipient's username"
@@ -83,7 +83,7 @@ class MyNav extends Component {
                       id="button-addon2"
                       onClick={this.handleButtonInput}
                     >
-                      Button
+                      Cerca
                     </Button>
                   </InputGroup>
                 </>
@@ -92,16 +92,16 @@ class MyNav extends Component {
                 variant="btn"
                 onClick={this.handleCLickButton}
               >
-                <i class="bi bi-search icons"></i>
+                <i className="bi bi-search icons"></i>
               </Button>
               <div className="p-2 fw-bold text-white">
                 KIDS
               </div>
               <div>
-                <i class="bi bi-bell icons"></i>
+                <i className="bi bi-bell icons"></i>
               </div>
               <div>
-                <i class="bi bi-person-circle icons"></i>
+                <i className="bi bi-person-circle icons"></i>
               </div>
             </Stack>
           </Navbar.Collapse>

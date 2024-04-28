@@ -13,10 +13,10 @@ const MyFooter = () => {
           <Col xs={6}>
             <Row>
               <Col className="mb-2">
-                <i class="bi bi-facebook footer-icon me-2"></i>
-                <i class="bi bi-instagram footer-icon me-2"></i>
-                <i class="bi bi-twitter-x footer-icon me-2"></i>
-                <i class="bi bi-youtube footer-icon"></i>
+                <i className="bi bi-facebook footer-icon me-2"></i>
+                <i className="bi bi-instagram footer-icon me-2"></i>
+                <i className="bi bi-twitter-x footer-icon me-2"></i>
+                <i className="bi bi-youtube footer-icon"></i>
               </Col>
             </Row>
             <Row xs={1} sm={2} lg={4}>
