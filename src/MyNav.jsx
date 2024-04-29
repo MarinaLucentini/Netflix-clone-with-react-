@@ -77,6 +77,7 @@ class MyNav extends Component {
                       aria-label="Recipient's username"
                       aria-describedby="basic-addon2"
                       onChange={this.handleInput}
+                      value={this.state.searchUser}
                     />
                     <Button
                       variant="outline-secondary"

@@ -22,7 +22,6 @@ class MyGallerySearch extends Component {
   };
 
   fetchMovies = () => {
-    if (!this.props.fetch) return;
     this.setState({ isLoading: true });
 
     fetch(
