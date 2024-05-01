@@ -16,6 +16,7 @@ class MyGallery extends Component {
     isLoading: false,
     isError: false,
     errorMsg: "",
+    hoveredImageId: null,
     isShow: false,
   };
 
@@ -66,11 +67,18 @@ class MyGallery extends Component {
   componentDidMount = (fetch) => {
     this.fetchMovies();
   };
-  handleMouseEnter = () => {
-    this.setState({ isShow: true });
+  handleMouseEnter = (id) => {
+    this.setState({ hoveredImageId: id });
   };
 
   handleMouseLeave = () => {
+    this.setState({ hoveredImageId: null });
+  };
+  handleShow = () => {
+    this.setState({ isShow: true });
+  };
+
+  handleClose = () => {
     this.setState({ isShow: false });
   };
   render() {
@@ -139,12 +147,79 @@ class MyGallery extends Component {
               return (
                 <>
                   <div
-                    onMouseEnter={this.handleMouseEnter}
-                    onMouseLeave={this.handleMouseLeave}
+                    onMouseEnter={() =>
+                      this.handleMouseEnter(films.imdbID)
+                    }
+                    onMouseLeave={() =>
+                      this.handleMouseLeave
+                    }
                     key={films.imdbID}
                     className="mx-2"
                   >
-                    {!this.state.isShow && (
+                    {!this.state.hoveredImageId ||
+                    this.state.hoveredImageId ===
+                      films.imdbID ? (
+                      <>
+                        <Card
+                          onMouseEnter={() =>
+                            this.handleMouseEnter(
+                              films.imdbID
+                            )
+                          }
+                          onMouseLeave={() =>
+                            this.handleMouseLeave
+                          }
+                          className="bg-dark text-white mx-2 card-size"
+                        >
+                          <Card.Img
+                            variant="top"
+                            src={films.Poster}
+                          />
+
+                          <Card.Body>
+                            {this.state.isShow ? (
+                              <div className="ratio ratio-1x1">
+                                <iframe
+                                  width="560"
+                                  height="315"
+                                  src="https://www.youtube.com/embed/Eax4oQb5p04?si=YF70Xzx0s_SOYTel"
+                                  title="YouTube video player"
+                                  frameborder="0"
+                                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                                  referrerpolicy="strict-origin-when-cross-origin"
+                                  allowfullscreen
+                                ></iframe>
+                                <Button
+                                  variant="outline-light"
+                                  className=" w-25 h-25"
+                                  onClick={() =>
+                                    this.handleClose()
+                                  }
+                                >
+                                  <i className="bi bi-x-lg"></i>
+                                </Button>
+                              </div>
+                            ) : (
+                              <>
+                                <Card.Title>
+                                  {films.Title}
+                                </Card.Title>
+
+                                <Button
+                                  variant="outline-light"
+                                  className="rounded-circle"
+                                  onClick={() =>
+                                    this.handleShow()
+                                  }
+                                >
+                                  <i className="bi bi-play-fill"></i>
+                                </Button>
+                              </>
+                            )}
+                          </Card.Body>
+                        </Card>
+                      </>
+                    ) : (
                       <img
                         src={films.Poster}
                         alt={films.Title}
@@ -152,30 +227,6 @@ class MyGallery extends Component {
                       />
                     )}
                   </div>
-
-                  {this.state.isShow && (
-                    <Card
-                      onMouseEnter={this.handleMouseEnter}
-                      onMouseLeave={this.handleMouseLeave}
-                      className="bg-dark text-white mx-2 card-size"
-                    >
-                      <Card.Img
-                        variant="top"
-                        src={films.Poster}
-                      />
-                      <Card.Body>
-                        <Card.Title>
-                          {films.Title}
-                        </Card.Title>
-                        <Button
-                          variant="outline-light"
-                          className="rounded-circle"
-                        >
-                          <i className="bi bi-play-fill"></i>
-                        </Button>
-                      </Card.Body>
-                    </Card>
-                  )}
                 </>
               );
             })}

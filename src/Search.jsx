@@ -19,7 +19,6 @@ class Search extends Component {
   };
   handlesearchUser = (search) => {
     this.setState({ searchUser: search });
-    console.log(typeof this.state.searchUser);
   };
   render() {
     return (

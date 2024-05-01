@@ -153,10 +153,10 @@ class MyGallerySearch extends Component {
         )}
 
         <div className="slider-container">
-          <Slider {...settings}>
-            {filterMovies.map((films) => {
-              return (
-                <>
+          {filterMovies.map((films) => {
+            return (
+              <>
+                <Slider {...settings}>
                   <div
                     onMouseEnter={this.handleMouseEnter}
                     onMouseLeave={this.handleMouseLeave}
@@ -195,10 +195,10 @@ class MyGallerySearch extends Component {
                       </Card.Body>
                     </Card>
                   )}
-                </>
-              );
-            })}
-          </Slider>
+                </Slider>
+              </>
+            );
+          })}
         </div>
       </div>
     );
