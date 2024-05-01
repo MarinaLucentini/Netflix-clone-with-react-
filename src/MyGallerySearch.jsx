@@ -17,7 +17,7 @@ class MyGallerySearch extends Component {
     isLoading: false,
     isError: false,
     errorMsg: "",
-    isShow: false,
+    hoveredImageId: null,
     isFetch: false,
   };
 
@@ -81,12 +81,12 @@ class MyGallerySearch extends Component {
     }
   }
 
-  handleMouseEnter = () => {
-    this.setState({ isShow: true });
+  handleMouseEnter = (id) => {
+    this.setState({ hoveredImageId: id });
   };
 
   handleMouseLeave = () => {
-    this.setState({ isShow: false });
+    this.setState({ hoveredImageId: null });
   };
   handleClickButton = () => {
     this.setState({ isFetch: true });
@@ -153,17 +153,49 @@ class MyGallerySearch extends Component {
         )}
 
         <div className="slider-container">
-          {filterMovies.map((films) => {
-            return (
-              <>
-                <Slider {...settings}>
+          <Slider {...settings}>
+            {filterMovies.map((films) => {
+              return (
+                <>
                   <div
-                    onMouseEnter={this.handleMouseEnter}
-                    onMouseLeave={this.handleMouseLeave}
+                    onMouseEnter={() =>
+                      this.handleMouseEnter(films.imdbID)
+                    }
+                    onMouseLeave={() =>
+                      this.handleMouseLeave()
+                    }
                     key={films.imdbID}
                     className="mx-2"
                   >
-                    {!this.state.isShow && (
+                    {!this.state.hoveredImageId ||
+                    this.state.hoveredImageId ===
+                      films.imdbID ? (
+                      <Card
+                        onMouseEnter={() =>
+                          this.handleMouseEnter
+                        }
+                        onMouseLeave={() =>
+                          this.handleMouseLeave
+                        }
+                        className="bg-dark text-white mx-2 card-size"
+                      >
+                        <Card.Img
+                          variant="top"
+                          src={films.Poster}
+                        />
+                        <Card.Body>
+                          <Card.Title>
+                            {films.Title}
+                          </Card.Title>
+                          <Button
+                            variant="outline-light"
+                            className="rounded-circle"
+                          >
+                            <i className="bi bi-play-fill"></i>
+                          </Button>
+                        </Card.Body>
+                      </Card>
+                    ) : (
                       <img
                         src={films.Poster}
                         alt={films.Title}
@@ -171,34 +203,10 @@ class MyGallerySearch extends Component {
                       />
                     )}
                   </div>
-
-                  {this.state.isShow && (
-                    <Card
-                      onMouseEnter={this.handleMouseEnter}
-                      onMouseLeave={this.handleMouseLeave}
-                      className="bg-dark text-white mx-2 card-size"
-                    >
-                      <Card.Img
-                        variant="top"
-                        src={films.Poster}
-                      />
-                      <Card.Body>
-                        <Card.Title>
-                          {films.Title}
-                        </Card.Title>
-                        <Button
-                          variant="outline-light"
-                          className="rounded-circle"
-                        >
-                          <i className="bi bi-play-fill"></i>
-                        </Button>
-                      </Card.Body>
-                    </Card>
-                  )}
-                </Slider>
-              </>
-            );
-          })}
+                </>
+              );
+            })}
+          </Slider>
         </div>
       </div>
     );
